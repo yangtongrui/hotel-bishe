@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gp.bishe.dao.UserMapper">
+
+    <!-- User login( String username)-->
+    <select id="login"  parameterType="java.lang.String" resultType="com.gp.bishe.pojo.User">
+        select * from user
+        where username=#{username}
+    </select>
+
+    <!--User findUserById(String userId);-->
+    <select id="findUserById" resultType="com.gp.bishe.pojo.User" parameterType="String">
+        select * from user where userid = #{userId}
+    </select>
+
+    <!--User selectByName(String username);-->
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.gp.bishe.pojo.User">
+        select * from USER
+        <where>
+            username = #{username}
+        </where>
+    </select>
+
+    <!--void insertUser(User user);-->
+    <insert id="insertUser" parameterType="com.gp.bishe.pojo.User">
+        insert into user(username,realname,userpwd,phone,prefix) values(#{username},#{realname},#{userpwd},#{phone},#{prefix})
+    </insert>
+
+    <!--List<User> getUserList();-->
+    <select id="getUserList"  resultType="com.gp.bishe.pojo.User">
+        select * from user
+        <where>
+            vipsign=1
+        </where>
+    </select>
+</mapper>

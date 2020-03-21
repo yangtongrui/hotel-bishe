@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gp.bishe.dao.ManagerMapper">
+
+    <!-- Manager login(String managername);-->
+    <select id="login"  parameterType="java.lang.String" resultType="com.gp.bishe.pojo.Manager">
+        select * from manager
+        <where>
+            managername = #{managername}
+        </where>
+    </select>
+
+    <!--List<Manager> getManagerList();-->
+    <select id="getManagerList" resultType="com.gp.bishe.pojo.Manager">
+        select * from manager
+    </select>
+
+    <!--Manager selectManagerByName(String managername);-->
+    <select id="selectManagerByName"  parameterType="java.lang.String" resultType="com.gp.bishe.pojo.Manager">
+        select * from manager
+        <where>
+            managername =  #{managername}
+        </where>
+    </select>
+
+    <!--void insertManager(Manager manager);-->
+    <insert id="insertManager" parameterType="com.gp.bishe.pojo.Manager">
+        insert into manager(managername,managerpwd,managersign,managerdate,phone,creater)
+        values (#{managername},#{managerpwd},#{managersign},#{managerdate},#{phone},#{creater})
+    </insert>
+
+    <!--void deleteManagerById(Integer id);-->
+    <delete id="deleteManagerById" parameterType="java.lang.Integer">
+        delete from manager
+        <where>
+            managerid = #{id}
+        </where>
+    </delete>
+
+    <!--void changePwd(Manager manager);-->
+    <update id="changePwd" parameterType="com.gp.bishe.pojo.Manager">
+        update manager
+        <set>
+            <if test="null != managerpwd and managerpwd != ''">
+                managerpwd = #{managerpwd},
+            </if>
+        </set>
+        <where>
+            managerid = #{managerid}
+        </where>
+    </update>
+
+    <!--void updateMessage(Manager manager);-->
+    <update id="updateMessage" parameterType="com.gp.bishe.pojo.Manager">
+        update manager
+        <set>
+            <if test="null != sex and sex != ''">
+                sex = #{sex},
+            </if>
+            <if test="null != age and age != ''">
+                age = #{age},
+            </if>
+            <if test="null != birthday and birthday != ''">
+                birthday = #{birthday},
+            </if>
+            <if test="null != email and email != ''">
+                email = #{email},
+            </if>
+            <if test="null != prefix and prefix != ''">
+                prefix = #{prefix},
+            </if>
+            <if test="null != phone and phone != ''">
+                phone = #{phone},
+            </if>
+        </set>
+        <where>
+            managerid = #{managerid}
+        </where>
+    </update>
+
+    <!--void insertAddress(ManagerAddress managerAddress);-->
+    <insert id="insertAddress" parameterType="com.gp.bishe.pojo.ManagerAddress">
+        insert into manager_address(managername,province,city,district)
+        values (#{managername},#{province},#{city},#{district})
+    </insert>
+
+    <!--void insertAddressA(ManagerAddress managerAddress);-->
+    <insert id="insertAddressA" parameterType="com.gp.bishe.pojo.ManagerAddress">
+        insert into manager_address(managername,province,city)
+        values (#{managername},#{province},#{city})
+    </insert>
+
+    <!--void updateAddressA(ManagerAddress managerAddress);-->
+    <update id="updateAddressA" parameterType="com.gp.bishe.pojo.ManagerAddress">
+        update manager_address
+        <set>
+            <if test="null != managername and managername != ''">
+            managername = #{managername},
+        </if>
+                province = #{province},
+            <if test="null != city and city != ''">
+                city = #{city},
+            </if>
+                district = #{district},
+        </set>
+        <where>
+            managerid = #{managerid}
+        </where>
+    </update>
+    <!--void updateAddressB(ManagerAddress managerAddress);-->
+    <update id="updateAddressB" parameterType="com.gp.bishe.pojo.ManagerAddress">
+        update manager_address
+        <set>
+            <if test="null != managername and managername != ''">
+                managername = #{managername},
+            </if>
+                province = #{province},
+            <if test="null != city and city != ''">
+                city = #{city},
+            </if>
+            <if test="null != district and district != ''">
+                district = #{district},
+            </if>
+        </set>
+        <where>
+            managerid = #{managerid}
+        </where>
+    </update>
+    <!--void updateAddressC(ManagerAddress managerAddress);-->
+    <update id="updateAddressC" parameterType="com.gp.bishe.pojo.ManagerAddress">
+        update manager_address
+        <set>
+            <if test="null != managername and managername != ''">
+                managername = #{managername},
+            </if>
+            <if test="null != province and province != ''">
+                province = #{province},
+            </if>
+            <if test="null != city and city != ''">
+                city = #{city},
+            </if>
+            <if test="null != district and district != ''">
+                district = #{district},
+            </if>
+        </set>
+        <where>
+            managerid = #{managerid}
+        </where>
+    </update>
+
+    <!--void insertAddressID(int managerid);-->
+    <insert id="insertAddressID" parameterType="java.lang.Integer">
+        insert into manager_address(managerid) values(#{managerid})
+    </insert>
+
+    <!--ManagerAddress selectById(int managerid);-->
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.gp.bishe.pojo.ManagerAddress">
+        select * from manager_address
+        <where>
+            managerid = #{managerid}
+        </where>
+    </select>
+
+    <!-- Manager selectbyId(int id);-->
+    <select id="selectbyId" parameterType="java.lang.Integer" resultType="com.gp.bishe.pojo.Manager">
+        select * from manager
+        <where>
+            managerid = #{id}
+        </where>
+    </select>
+</mapper>

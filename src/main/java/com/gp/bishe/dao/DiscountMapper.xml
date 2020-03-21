@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gp.bishe.dao.DiscountMapper">
+
+    <!-- List<Discount> getAllDiscountList();-->
+    <select id="getAllDiscountList" resultType="com.gp.bishe.pojo.Discount">
+        select * from room_discount
+    </select>
+
+   <!-- Discount selectDiscountByid(Integer id);-->
+    <select id="selectDiscountByid"  parameterType="java.lang.Integer" resultType="com.gp.bishe.pojo.Discount">
+        select * from room_discount
+        <where>
+            disid =  #{id}
+        </where>
+    </select>
+
+    <!-- void updateDiscount(Discount discount);-->
+    <update id="updateDiscount" >
+        update room_discount
+        <set>
+            <if test="null != nordiscountweek and nordiscountweek != ''">
+                nordiscountweek = #{nordiscountweek},
+            </if>
+            <if test="null != nordiscountmonth and nordiscountmonth != ''">
+                nordiscountmonth = #{nordiscountmonth},
+            </if>
+            <if test="null != nordiscountseason and nordiscountseason != ''">
+                nordiscountseason = #{nordiscountseason},
+            </if>
+            <if test="null != nordiscounthalfyear and nordiscounthalfyear != ''">
+                nordiscounthalfyear = #{nordiscounthalfyear},
+            </if>
+            <if test="null != nordiscountyear and nordiscountyear != ''">
+                nordiscountyear = #{nordiscountyear},
+            </if>
+            <if test="null != vipdiscountweek and vipdiscountweek != ''">
+                vipdiscountweek = #{vipdiscountweek},
+            </if>
+            <if test="null != vipdiscountmonth and vipdiscountmonth != ''">
+                vipdiscountmonth = #{vipdiscountmonth},
+            </if>
+            <if test="null != vipdiscountseason and vipdiscountseason != ''">
+                vipdiscountseason = #{vipdiscountseason},
+            </if>
+            <if test="null != vipdiscounthalfyear and vipdiscounthalfyear != ''">
+                vipdiscounthalfyear = #{vipdiscounthalfyear},
+            </if>
+            <if test="null != vipdiscountyear and vipdiscountyear != ''">
+                vipdiscountyear = #{vipdiscountyear},
+            </if>
+            <if test="null != creater and creater != ''">
+                creater = #{creater},
+            </if>
+
+        </set>
+        <where>
+            disid = #{disid}
+        </where>
+    </update>
+
+    <!--Discount selectDiscountByType(String roomtype);-->
+    <select id="selectDiscountByType"  parameterType="java.lang.String" resultType="com.gp.bishe.pojo.Discount">
+    select * from room_discount
+    <where>
+        roomtype =  #{roomtype}
+    </where>
+    </select>
+
+   <!-- void insertDiscount(Discount discount);-->
+    <insert id="insertDiscount" parameterType="com.gp.bishe.pojo.Discount">
+         insert into room_discount(roomtype,nordiscountweek,nordiscountmonth,nordiscountseason,nordiscounthalfyear,nordiscountyear,
+        vipdiscountweek,vipdiscountmonth,vipdiscountseason,vipdiscounthalfyear,vipdiscountyear,creater)
+        values (#{roomtype},#{nordiscountweek},#{nordiscountmonth},#{nordiscountseason},#{nordiscounthalfyear},#{nordiscountyear},
+        #{vipdiscountweek},#{vipdiscountmonth},#{vipdiscountseason},#{vipdiscounthalfyear},#{vipdiscountyear},#{creater})
+    </insert>
+</mapper>
